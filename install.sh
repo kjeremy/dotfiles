@@ -24,3 +24,16 @@ for file in $files; do
   echo "Creating symlink to $file in home directory."
   ln -s $dir/$file ~/.$file
 done
+
+echo "Is vundle installed?"
+if  [ ! -d "$HOME/.vim/bundle/vundle" ]; then
+  echo "...no"
+  echo "Checking out vundle"
+  mkdir -p $HOME/.vim/bundle
+  git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+  echo "Installing plugins"
+  vim +PluginInstall +qall
+  echo "...done"
+else
+  echo "...yes"
+fi
